@@ -12,5 +12,6 @@ app.use(createPinia())
 app.use(router)
 
 // git branch
+// commitlint
 
 app.mount('#app')
