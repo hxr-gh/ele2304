@@ -13,5 +13,6 @@ app.use(router)
 
 // git branch
 // commitlint
+// ESLint+Prettier
 
 app.mount('#app')
