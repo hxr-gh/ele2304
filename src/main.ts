@@ -7,8 +7,10 @@ import App from './App.vue'
 import router from './router'
 import 'vant/lib/index.css'
 import './assets/common.scss'
+import 'default-passive-events'
+import lazyPlugin from './direction/lazyLoading'
 
-import { Tabbar, TabbarItem, Search, Icon, Loading, Skeleton } from 'vant'
+import { Tabbar, TabbarItem, Search, Icon, Loading, Skeleton, Tabs, Tab, Sticky } from 'vant'
 
 const app = createApp(App)
 
@@ -21,6 +23,10 @@ app.use(Search)
 app.use(Icon)
 app.use(Loading)
 app.use(Skeleton)
+app.use(Tabs)
+app.use(Tab)
+app.use(Sticky)
+app.use(lazyPlugin)
 
 const rootValue = 16 //根节点的font-size值
 const rootWidth = 390 //设计稿的宽

@@ -1,5 +1,9 @@
 {
   "files": [],
+  // TS编译时的配置
+  "compilerOptions": {
+    "lib": ["es2017", "DOM"]
+  },
   "references": [
     {
       "path": "./tsconfig.node.json"
