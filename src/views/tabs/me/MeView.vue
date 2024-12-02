@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useAuth } from '@/use/useAuth'
 import type { ISuperCard } from '@/types'
 import { fetchMePageData } from '@/api/me'
 import { useAsync } from '@/use/useAsync'
@@ -18,6 +19,9 @@ const gotoLogin = () => {
     name: 'login' //跳转到哪个路由所指定的路由名
   })
 }
+
+//导入用户信息Hooks
+const { user, logout } = useAuth()
 </script>
 
 <template>
@@ -25,12 +29,24 @@ const gotoLogin = () => {
   <div class="me-page op-fullscreen">
     <!-- 顶部 -->
     <div class="me-page__top">
-      <!-- 头像 -->
-      <img class="avatar" src="https://b.yzcdn.cn/vant/icon-demo-1126.png" alt="" />
-      <!-- 请登录/姓名 -->
-      <div class="name" @click="gotoLogin">请登录</div>
-      <!-- 账号登录 -->
-      <div class="account op-thin-border" @click="gotoLogin">账号登录</div>
+      <!-- 已登录 -->
+      <template v-if="user.id">
+        <!-- 头像 -->
+        <img class="avatar" :src="user.avatar" alt="" />
+        <!-- 请登录/姓名 -->
+        <div class="name">{{ user.nikename }}</div>
+        <!-- 账号登录 -->
+        <div class="account op-thin-border" @click="logout">退出登录</div>
+      </template>
+      <!-- 未登录 -->
+      <template v-else>
+        <!-- 头像 -->
+        <img class="avatar" src="https://b.yzcdn.cn/vant/icon-demo-1126.png" alt="" />
+        <!-- 请登录/姓名 -->
+        <div class="name" @click="gotoLogin">请登录</div>
+        <!-- 账号登录 -->
+        <div class="account op-thin-border" @click="gotoLogin">账号登录</div>
+      </template>
     </div>
     <!-- 骨架屏 -->
     <OpLoadingView :loading="pending" type="skeleton">

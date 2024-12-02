@@ -1,3 +1,4 @@
+//商品列表
 export interface IShop {
   activitys: IActivity[] //商家活动
   branch: string //商家分店
@@ -17,44 +18,38 @@ export interface IShop {
   tops: string[] //热销排名信息
 }
 
-//商家提供服务
 export interface IService {
   type: number //服务的类型
   label: string //具体的服务
 }
 
-//商家活动
 export interface IActivity {
   type: number //活动的类型
   tips?: string //提示信息
   infos?: string[] //活动的信息
 }
 
-//
+//商品详情
 export interface IShopDetail extends IShop {
-  announcement: string
-  discounts: IDiscount[]
-  redbags: IRedbag[]
+  announcement: string //公告
+  discounts: IDiscount[] //优惠
+  redbags: IRedbag[] //红包
 }
 
-//
 export interface IDiscount {
-  type: number
-  label: string
-  content: IDiscountContent[]
+  type: number //优惠的类型
+  label: string //优惠的名称
+  content: IDiscountContent[] //优惠的内容
 }
 
-//
 export interface IRedbag {
   type: number
   count: number
-  if: string
+  if: string //红包的使用条件
 }
-
-//
 export interface IDiscountContent {
-  count: number
-  if: number
-  limit: number
-  label: string
+  if: number //满多少
+  count: number //减多少
+  limit: number //优惠上限
+  label: string //任选优惠文案
 }

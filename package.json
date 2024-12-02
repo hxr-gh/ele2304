@@ -11,11 +11,13 @@
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "echo \"Husky: no test specified\""
   },
   "dependencies": {
     "axios": "^1.7.7",
     "default-passive-events": "^2.0.0",
+    "jsonwebtoken": "^9.0.2",
     "pinia": "^2.2.4",
     "vant": "^4.9.8",
     "vue": "^3.5.12",
