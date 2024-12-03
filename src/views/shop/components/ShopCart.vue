@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { useEventBus } from '@/use/useEventBus'
+import { useTransition } from '@/use/useTransition'
 import { showConfirmDialog } from 'vant'
 import GoodsItem from './GoodsItem.vue'
 import { useToggle } from '@/use/useToggle'
@@ -38,6 +40,16 @@ const removeAll = () => {
       // console.log('catch')
     })
 }
+
+//调用Hooks
+const { items, start, beforeEnter, enter, afterEnter } = useTransition()
+
+//调用Hooks
+const eventBus = useEventBus()
+//绑定cart-add事件，事件触发时执行回调并传入点击哪个+加号按钮
+eventBus.on('cart-add', el => {
+  start(el)
+})
 </script>
 
 <template>
@@ -124,6 +136,20 @@ const removeAll = () => {
         </div>
         <!-- 无商品 -->
         <div class="order-btn order-btn--empty" v-else>￥20起送</div>
+      </div>
+    </div>
+
+    <!-- 小球 -->
+    <div class="shop-cart__ball-container">
+      <div v-for="(v, i) in items" :key="i">
+        <Transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
+          <!-- v-show="true"时，.ball这个div显示并开始做Transition动画，按顺序依次触发三个事件 -->
+          <div class="ball" v-show="v.isShown">
+            <!-- .ball负责y轴方向的动画
+                 .inner负责x轴方向的动画 -->
+            <div class="inner"></div>
+          </div>
+        </Transition>
       </div>
     </div>
   </div>
