@@ -45,7 +45,7 @@ const removeAll = () => {
 const { items, start, beforeEnter, enter, afterEnter } = useTransition()
 
 //调用Hooks
-const eventBus = useEventBus()
+const eventBus = useEventBus() //获取一个事件通知类的实例
 //绑定cart-add事件，事件触发时执行回调并传入点击哪个+加号按钮
 eventBus.on('cart-add', el => {
   start(el)

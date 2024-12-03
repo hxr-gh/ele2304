@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useEventBus } from '@/use/useEventBus'
 import { useCartStore } from '@/stores/cart'
 import type { IGood } from '@/types'
 import { computed } from 'vue'
@@ -10,6 +11,8 @@ const props = defineProps<IProps>()
 
 const store = useCartStore() //全局状态管理
 
+const eventBus = useEventBus()
+
 //是否显示减号和数字
 // const cartCount = ref(props.data.cartCount)
 const cartCount = computed(() => store.cartCountById(props.data.id))
@@ -20,9 +23,10 @@ const minus = () => {
   store.removeProductToCart(props.data)
 }
 //数量增加
-const add = () => {
+const add = (event: Event) => {
   // cartCount.value++
   store.pushProductToCart(props.data)
+  eventBus.emit('cart-add', event.target)
 }
 </script>
 
